@@ -1,0 +1,136 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz, calc}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+%% The next line says how the "vertex" style of nodes should look: drawn as small circles.
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt,fill=white]
+%%
+%% Next, we make a \vertex command as a shorthand in place of \node[vertex} to get that style.
+\newcommand{\vertex}{\node[vertex]}
+
+\linespread{1.1}
+
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Senior Seminar: Homework 7}
+\chead{\sc Stefano Fochesatto } 
+\rhead{due: Friday 02/21/2020}
+\cfoot{}
+\pagestyle{fancy}
+\usepackage{float}
+\usepackage{csquotes}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+ 
+\begin{enumerate}
+\item (problem A) Prove that if $\Delta(G) \leq 2,$ then $G$ consists of paths and cycles.\\
+
+\textbf{Proof} Suppose graph $G$ such that $\Delta(G) \leq 2$. Consider a component in $G$, $H$. Note $H$ can contain, $\Delta(H) = 0$, $1 \leq \Delta(H) \leq 2$.\\
+Case 1: Suppose $\Delta(H) = 0$, then $H$ is a trivial component. A path length 0.\\
+Case 2: Suppose $1 \leq \Delta(H) \leq 2$. Consider the maximal path $P$ in $H$. Note that every vertex, excluding the endpoints of the path must have degree 2. If the endpoints have degree two then they have to be adjacent and the component is a cycle, and if the endpoints have degree one then the maximal path contains every edge in the component and therefore the component is a path.\\
+
+\vspace{1.5in} 
+
+\item (problem B.1) Find a maximum matching in the graphs below. Demonstrate that your answer is correct.
+\begin{figure}[H]
+\caption{Graph $G$}
+\centering
+\includegraphics[width=.5\textwidth]{"Matching".png}
+\end{figure}
+
+\textbf{Proof} Suppose an $A,B$ Bi-graph $G$. Now consider the following vertex cover, $V$(denoted by red vertices) for graph $G$. 
+\begin{figure}[H]
+\caption{Graph $G$, Vertex Cover $V$ in Red}
+\centering
+\includegraphics[width=.5\textwidth]{"Matching1".png}
+\end{figure}
+Note that $|V| = 3$ and we cannot make it any smaller, since $a_4$,$b_3$, and $b_2$ must be added to the vertex cover in order to include edges $e, f and g$ respectively. By The Kőnig-Egervary Theorem we know that our maximum matching must be the same size as our minimal vertex cover. Consider the maximum matching $M$ composed of edges $e, f$ and $g$.
+\vspace{1in}
+
+
+\item (problem B.2) Find a maximum matching in the graphs below. Demonstrate that your answer is correct.\\
+\begin{figure}[H]
+\caption{Graph $G$}
+\centering
+\includegraphics[width=.5\textwidth]{"Matching3".png}
+\end{figure}
+\textbf{Proof} Suppose an $A,B$ Bi-graph $G$. Now consider the following vertex cover, $V$(denoted by red vertices) for graph $G$.
+
+\begin{figure}[H]
+\caption{Graph $G$, Vertex Cover $V$ in Red}
+\centering
+\includegraphics[width=.5\textwidth]{"Matching4".png}
+\end{figure}
+Note that $|V| = 4$ and we cannot make it any smaller since vertex $a_2$ and $a_4$ must be added in order to include edges $g$ and $e$, also consider the path $P$ formed by $[a_1,b_2,a_3,b_4,a_5]$ in order to include every edge in the path using the smallest number of vertices we must include vertices $b_2$ and $b_4$. By The Kőnig-Egervary Theorem we know that our maximum matching must be the same size as our minimal vertex cover. Consider the maximum matching $M$ composed of edges $e, f, h$ and $h$.
+\vspace{1in}
+
+\item (problem 3.1.2) Determine the minimum size of a maximal matching in the cycle $C_n.$\\
+
+\textbf{Proof} Suppose a cycle $C_n$.  Consider a path $P$ length three, in $C_n$. Note how in order to create a minimal sized maximal matching $M$ at-least one of the three edges in $P$ must be in $M$. Therefore it must follow for every group of three vertices that are added to the cycle we must add one more edge in the matching. This leads us to the inequality,
+\begin{equation*}
+|M| \geq \ceil{\frac{n}{3}}
+\end{equation*}
+(Proof goes something like this, it feel like strong induction or PHP)
+\vspace{1.5in}
+
+
+\item (problem 3.1.18) Two people play a game on a graph $G$, alternately choosing distinct vertices. Player 1 starts by choosing any vertex. Each subsequent choice must be adjacent to the preceding choice of the other player. Thus, together they follow a path. The last player able to move wins.\\
+Prove that the second player has a winning strategy if $G$ has a perfect matching and otherwise the first player has a winning strategy. (Hint: For the second part, the first player should start with a vertex omitted by some maximum matching.)\\\\
+
+ 
+\textbf{Proof} \textbf{Case 1:} Suppose that the game is played on a graph $G$ that contains a perfect matching $M$. Since $G$
+ contains a perfect matching $M$, every vertex is saturated, therefore Player 1 must pick a saturated vertex. Since $M$ is a perfect matching every vertex is incident to exactly one matching edge. Note, that it must be the case that Player 2 can select a vertex such that the edge that is added is in $M$ and it follows that Player 1 will only be able to pick a vertex such that the edge that is added to the path is not from $M$. Now consider Berge's Lemma (Theorem 3.1.10) which states that,\\
+ 
+\begin{displayquote}
+"A matching $M$ in a graph $G$ is a maximum matching in $G$ if and only if $G$ has no $M$-Augmenting path."\\
+\end{displayquote}
+
+Since $M$ in our case is a perfect matching it is also the maximum matching. Therefore by Berge's lemma every alternating path generated by the game will end with an edge in the matching and therefore Player 2 will win. \\\\
+
+
+\noindent \textbf{Case 2:} Suppose that the game is played on a graph $G$ that does not contain a perfect matching but does contain a maximum matching $M$. Suppose that Player 1 selects an unsaturated vertex. From here it follows that whichever vertex Player 2 selects it must be saturated by $M$ otherwise the edge, $e$ that is added to the path would be incident to two unsaturated vertices and would therefore make $M + e$ the maximum matching. Suppose that if given the option Player 1 will always choose a vertex that adds a matched edge to the path. Note, that by Berge's Lemma, $G$ has no $M$-Augmenting path, therefore for the rest of the game every vertex that Player 2 picks must be saturated by $M$ and they must arrive to the vertex via a non-matched edge. Therefore it follows that Player 1 will always have the option to select a vertex such that the edge that is added is in $M$, and thus Player 1 will win. 
+
+\vspace{1.5in}
+
+
+
+\item Prove or disprove: If $G$ is connected, has an even number of vertices and $\delta(G) \geq 3,$ then $G$ has a  perfect matching.\\
+
+
+\textbf{Proof} Consider the following graph $G$. Note that $|V(G)| = 16$ and $G$ is $3$-regular. 
+\begin{figure}[H]
+\caption{Graph $G$}
+\centering
+\includegraphics[width=.66\textwidth]{"Counter".png}
+\end{figure}
+Now consider Tutte's Condition (Theorem 3.3.3 p.136) which states that a graph $G$ decomposes into a 1-factor (and therefore has and perfect matching) if for every subset $S$ of $V(G)$ the number of odd components in $G-S$ is less than or equal to $|S|$. Note that in our graph $G$ if we remove vertex $a$ we get three odd components, so our graph $G$ fails Tutte's Condition and therefore $G$ does not have a perfect matching. We can also see this by the contrapositive to Corollary 3.3.8 on p.139.
+
+
+
+
+
+\vspace{1.5in}
+
+
+\end{enumerate}
+\end{document}
+
+
+

@@ -1,0 +1,236 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+%typical packages
+\usepackage{tikz,amsfonts,amsmath,pgfplots,float}
+
+%typical tikz stuff
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt,fill=white]
+\newcommand{\vertex}{\node[vertex]}
+
+
+\title{Automorphism Groups:}
+\subtitle{Theorems 2.10 and 2.11}
+\author{Stefano Fochesatto}
+\institute{University of Alaska Fairbanks}
+\date{\today}
+
+\begin{document}
+
+ %TITLE PAGE
+ \begin{frame}
+\titlepage
+\end{frame}
+
+%Second Page
+\begin{frame}
+\frametitle{Review}
+\begin{center}
+\begin{itemize}
+	\item Automorphism: An isomorphism from a graph $G$ to itself. 
+	\begin{itemize}
+		\item A permutation of V(G) that preserves adjacency and non-adjacency
+			\begin{figure}[H]
+			\caption{f:(BC)}
+			\centering
+			\includegraphics[width=.45\textwidth]{"automapping".png}
+			\end{figure}
+
+	\end{itemize}
+		\vfill
+	\item Automorphism Group: The set of all automorphisms on $G$, form a group (denoted $Aut(G)$) under function composition. 
+\end{itemize}
+\end{center}
+\end{frame}
+
+
+
+
+%Third Page
+\begin{frame}
+\frametitle{Theorem 2.10}
+\begin{center}
+$\bold{Theorem \;2.10:}$ For every graph $G$, $Aut(G) \cong Aut(\overline{G})$
+\begin{itemize}
+	\item How do we prove this?
+\end{itemize}
+\end{center}
+\end{frame}
+
+%Fourth Page
+\begin{frame}
+\frametitle{Theorem 2.10}
+\begin{center}
+
+\begin{itemize}
+\item $\bold{Direct:}$ WTS: For every $i\in Aut(G)$, that $i\in Aut(\overline{G})$.
+	\begin{itemize}
+		\item Consider an automorphism $i \in Aut(G)$.
+		\vfill
+		\item By definition $i: V(G) \to V(G)$ that preserves adjacency and non-adjacency. 
+		\vfill
+		\item We can apply $i$ to the set $V(\overline{G})$ since $V(G) = V(\overline{G})$.		
+		\vfill
+		\item Note a function that preserves adjacency in $G$ will preserve non-adjacency in $\overline{G}$. 
+		\vfill
+		\item Similarly a function that preserves non-adjacency in $G$ will preserve adjacency in $\overline{G}$. 
+		\vfill
+		\item Therefore by definition $i$ is an automorphism for $\overline{G}$.
+		\vfill
+		\item Thus $i \in Aut(\overline{G})$.
+	\end{itemize}
+\end{itemize}
+\end{center}
+\end{frame}
+
+
+
+%Fifth Page
+\begin{frame}
+\frametitle{Theorem 2.10 Example:}
+\begin{center}
+		\begin{figure}[H]
+		\caption{$i: (AB)(CD)$}
+		\centering
+		\includegraphics[width=.45\textwidth]{"210example".png}
+		\end{figure}
+		
+		\begin{figure}[H]
+		\caption{$i: (ABCD) \to (BADC)$}
+		\centering
+		\includegraphics[width=.45\textwidth]{"210examplecomp".png}
+		\end{figure}
+
+
+\end{center}
+\end{frame}
+
+
+% Sixth  Page
+\begin{frame}
+\frametitle{Theorem 2.11}
+\begin{center}
+$\bold{Theorem \;2.11:}$ The order of the automorphism group of a graph $G$ with order $n$ is a divisor of $n!$ and equals $n!$ if and only if $G = K_n$ or $G = \overline{K}_n$
+	\begin{itemize}
+		\item What does that even mean?
+		\vfill
+			\begin{itemize}
+				\item if $|V(G)| = n$ then $|Aut(G)| \bigl\vert n!$
+				\vfill
+				\item If $G = K_n$ or $G = \overline{K}_n$ then $|Aut(G)| = n!$
+				\vfill
+			\end{itemize}
+		\end{itemize}
+\end{center}
+\end{frame}
+
+%Seventh Page
+\begin{frame}
+\frametitle{Theorem 2.11}
+Recall
+\begin{center}
+\begin{itemize}
+	\item $\bold{Symmetric\;Group:}$ The symmetric group $S_n$ is the group of all permutations on $n$ elements. Thus $|S_n| = n!$
+	\begin{equation*}
+		S_3 = 	
+		\begin{pmatrix}
+		(1)(2)(3) &(1)(23)   \\
+		(123)& (2)(13)   \\
+		(132)& (3)(12)
+		\end{pmatrix}
+	\end{equation*}
+	\item $\bold{Lagrange's\; Theorem:}$ If $H$ is a subgroup of $G$, then $|G| = n|H|$ for some $n \in \mathbb{Z}$.
+		\begin{itemize}
+			\item This implies $H \bigl\vert G$.
+		\end{itemize}
+	\end{itemize}
+\end{center}
+\end{frame}
+
+%Eighth Page
+\begin{frame}
+\frametitle{Theorem 2.11}
+\begin{center}
+\begin{itemize}
+	\item $\bold{Direct:}$ WTS: if $|V(G)| = n$ then $|Aut(G)| \bigl\vert n!$
+		\begin{itemize}
+			\item Suppose a graph $G$ such that $|V(G)| = n$.
+			\vfill
+			\item By definition the of an Automorphism Group (permutation) we know that $Aut(G)$ is a group of permutations on $n$ elements that preserves (non)-adjacency,
+			\vfill
+			\item Note that $S_n$ is the group of $\bold{all}$ permutation on a set of $n$ elements. 
+			\vfill
+			\item Thus $Aut(G) \triangleright S_n$.
+			\vfill
+			\item By Lagrange's Theorem we know that $|Aut(G)| \bigl\vert |S_n|$, and by substitution we get $|Aut(G)| \bigl\vert n!$. 
+		\end{itemize}
+\end{itemize}
+\end{center}
+\end{frame}
+
+
+%Ninth Page
+\begin{frame}
+\frametitle{Theorem 2.11}
+\begin{center}
+\begin{itemize}
+	\item $\bold{Direct:}$ WTS: If $G = K_n$ or $G = \overline{K}_n$ then $|Aut(G)| = n!$
+		\begin{itemize}
+		\item Suppose $K_n$,
+		\vfill
+		\item By definition the of an Automorphism Group (permutation) we know that $Aut(K_n)$ is a group of permutations on $n$ elements that preserves (non)-adjacency.
+		\vfill
+		\item Since every vertex in $K_n$ is adjacent with the rest of the vertices, $\bold{every}$ permutation of $V(K_n)$ preserves (non)-adjacency.
+		\vfill
+		\item Therefore $Aut(K_n) \cong S_n$
+		\vfill
+		\item By Theorem 2.10 $Aut(K_n) \cong  Aut(\overline{K}_n)$
+		\vfill
+		\item Thus $|Aut(G)| = |Aut(\overline{K}_n| = n!.$
+		\end{itemize}
+\end{itemize}
+\end{center}
+\end{frame}
+
+
+
+
+
+
+%TenthPage
+\begin{frame}
+\frametitle{Theorem 2.11 Example:}
+\begin{center}
+		\begin{figure}[H]
+		\caption{Graph G:}
+		\centering
+		\includegraphics[width=.25\textwidth]{"211example".png}
+		\end{figure}
+\begin{itemize}
+\item\begin{equation*}
+	Aut(G) = \{(a)(b)(c), (a)(bc)\}
+	\end{equation*}
+\vfill
+\item \begin{equation*}
+	2 \bigl\vert 3!
+	\end{equation*}
+\end{itemize}
+\end{center}
+\end{frame}
+
+%  Twnth Page
+\begin{frame}
+\frametitle{Theorem 2.11 Example:}
+\begin{center}
+		\begin{figure}[H]
+		\caption{Graph G:}
+		\centering
+		\includegraphics[width=.75\textwidth]{"example2".png}
+		\end{figure}
+\end{center}
+\end{frame}
+
+
+\end{document}
+
+%\end{document}

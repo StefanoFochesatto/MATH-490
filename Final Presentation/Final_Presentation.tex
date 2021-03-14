@@ -1,0 +1,506 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+%typical packages
+\usepackage{tikz,amsfonts,amsmath,pgfplots,float}
+\usepackage{caption}
+
+\usepackage{graphicx}
+\usepackage{tabulary}
+
+\captionsetup[figure]{font=scriptsize, labelformat=empty}
+
+%typical tikz stuff
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt,fill=white]
+\newcommand{\vertex}{\node[vertex]}
+
+
+\title{The Art Gallery Problem}
+\subtitle{}
+\author{Stefano Fochesatto}
+\institute{University of Alaska Fairbanks}
+\date{\today}
+
+\begin{document}
+
+
+ %TITLE PAGE
+ \begin{frame}
+\titlepage
+\end{frame}
+
+%Second Page
+\begin{frame}
+\frametitle{Introduction}
+\begin{columns}
+\column{0.65\textwidth}
+\begin{itemize}
+	\item Original Art Gallery Problem: 
+		\begin{itemize}
+		\item Suppose you run an art gallery and want to know what the minimum number of security guards is needed to secure the gallery.
+		\vfill
+		\end{itemize}
+	\vfill
+	\vfill
+	\item Mathematical Interpretation:
+		\begin{itemize}
+		\item Suppose a simple polygon $S$, we say that vertex $v$ guards vertex $u$ if the segment $vu \in S$. What is the minimum number of vertices sufficient to guard all of $S$.
+		\end{itemize}
+	\end{itemize}
+\column{0.35\textwidth}
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{"victor".jpg}
+		\caption{Dr. Victor Klee (1925 - 2007)}
+		\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+
+
+%Third Page
+\begin{frame}
+\frametitle{Steve Fisk's Solution}
+\begin{center}
+\begin{itemize}
+\item Suppose a simple polygon $S$. 
+\item Triangulate $S$ such that no new vertices are added. 
+\item The triangulation of $S$ is 3 - colorable via an induction argument. 
+\item Denote colors $a,b,c$. Let $T_a$ denote the vertices colored by $a$. 
+\item Without loss of generality we can assume $|T_a|\leq |T_b| \leq |T_c|$. 
+\item Note that every point $u$ lies on some triangle in the triangulation of $S$ and every triangle contains a vertex $v$ from $T_a$. 
+\item Since triangles are convex we know that $vu \in S$ and therefore $T_a$ guard $S$. 
+\item Thus $\left \lfloor{\frac{n}{3}}\right \rfloor$ guards are sufficient to guard an $n$ vertex simple polygon. 
+\end{itemize}
+\end{center}
+\end{frame}
+
+%Fourth Page
+\begin{frame}
+\frametitle{Steve Fisk's Solution Example}
+\begin{center}
+	\begin{figure}[H]
+		\caption{Suppose a Simple Polygon $S$}
+		\centering
+		\includegraphics[width=.45\textwidth]{"FiskSolution copy 2".png}
+		\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Steve Fisk's Solution Example}
+\begin{center}
+	\begin{figure}[H]
+		\caption{Triangulate $S$}
+		\centering
+		\includegraphics[width=.45\textwidth]{"FiskSolution copy".png}
+		\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Steve Fisk's Solution Example}
+\begin{center}
+	\begin{figure}[H]
+		\caption{Three-color the Triangulation of $S$}
+		\centering
+		\includegraphics[width=.45\textwidth]{"FiskSolution".png}
+		\end{figure}
+\end{center}
+\end{frame}
+
+
+%Fifth Page
+\begin{frame}
+\frametitle{Orthogonal Art Galleries and Thomas Shermer}
+\begin{columns}
+\column{0.65\textwidth}
+Most of the time art galleries have walls that are parallel or perpendicular with each other, and the entire floor plan cannot be represented with a simple polygon. This leads us to an open variation of the problem which supposes the art gallery is represented by an orthogonal polygon with holes.
+\column{0.35\textwidth}
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=.75\textwidth]{"Orth".png}
+		\caption{An orthogonal polygon with 4 holes}
+		\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+% Sixth  Page
+\begin{frame}
+\frametitle{Orthogonal Art Galleries and Thomas Shermer}
+\begin{center}
+\begin{itemize}
+	\item Thomas Shermer's Conjecture: 
+		\begin{itemize}
+		\item Any orthogonal polygon with $n$ vertices and $h$ holes can always be guarded by $\left \lfloor{\frac{n+h}{4}}\right \rfloor$ guards. 
+		\end{itemize}
+		\vfill
+	\item Most of all the research I've seen is heavily inspired by Fisk's approach. 
+		\begin{itemize}
+		\item Quadrilateralization of the polygon.
+		\vfill
+		\item Make some sort of coloring argument on the quadrilateralization or the corresponding dual graph.  
+		\end{itemize}
+\end{itemize}\end{center}
+\end{frame}
+
+%Seventh Page
+\begin{frame}
+\frametitle{Pawel Zylinski's Cactus Graph Approach}
+\begin{center}
+\begin{itemize}
+	\item Published in March 7, 2006 from the University of Gdansk
+	\vfill
+	\item Pawal's research aims to prove that $\left \lfloor{\frac{n+h}{4}}\right \rfloor$ vertex guards are always sufficient to see the entire interior
+	of an $n$-vertex orthogonal polygon with an arbitrary number $h$ of holes if
+	that there exists a quadrilateralization whose dual graph is a cactus.
+\end{itemize}
+\end{center}
+\end{frame}
+
+
+%Ninth Page
+\begin{frame}
+\frametitle{Review}
+\begin{center}
+\begin{itemize}
+	\item Dual Graph
+		\begin{itemize}
+			\item Consider a planer graph $G$, the dual graph of $G$ is a graph that has a vertex for each face of $G$, two vertices are adjacent if the corresponding faces share an edge. 
+\begin{center}
+\begin{tabular}{cc}
+  \includegraphics[height=0.25\textheight]{"nonplaner".png}
+  &
+  \includegraphics[height=0.25\textheight]{"dual".png}
+   \\                                                     
+   Non-planer Graph& Planer Graph and Dual Graph
+ \end{tabular}
+ \end{center}
+\end{itemize}
+	\item Cactus Graph
+		\begin{itemize}
+			\item A graph with the property that any two of its cycles share at most one vertex. 
+		\begin{center}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[width=.5\textwidth]{"cactus".png}
+		\end{figure}
+		\end{center}
+		\end{itemize}
+\end{itemize}
+\end{center}
+\end{frame}
+
+
+
+
+
+
+%TenthPage
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole}
+\begin{itemize}
+	\item let $Q$ be the quadrilateralization of an $n$-vertex orthogonal polygon $P$, with one hole. 
+	\vfill
+	\item Adding the diagonals to each quadrilateral gives us the quadrilateralization graph $G_Q$
+	\vfill
+	\item Following Fisk, we want to for color $G_Q$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Quadrilateralization $Q$}
+	\centering
+	\includegraphics[width=.75\textwidth]{"polygonp".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Quadrilateralization Graph $G_{Q}$}
+	\centering
+	\includegraphics[width=.75\textwidth]{"polygonpquad".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+\begin{itemize}
+	\item Consider the dual graph $G_D$ of quadrilateralization $Q$.
+	\vfill
+	\item Note that $G_D$ is always composed of a single cycle and trees.
+	\vfill
+	\item Consider a quadrilateral, $P$ in $G_Q$ which corresponds to a leaf in $G_D$.
+	\vfill
+	\item Note that quadrilateral $P$ will always have two vertices $u,v$ that have degree three, and thus if $G^{1}_Q = G_{Q} - u,v$ is 4-colorable, if and only if $G_{Q}$ is also 4-colorable. 
+	\vfill
+	\item Note that $G_{Q} - u,v$ removes a leaf in $G_{D}$. 
+	\vfill
+	\item Repeat until $G_{D}$ is a cycle, let the corresponding graph be $G^{k}_Q$
+	\vfill
+	\item $G_{Q}$ is 4-colorable if and only if $G^{k}_Q$ is 4-colorable
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Dual Graph of $Q$, $G_D$}
+	\centering
+	\includegraphics[width=.75\textwidth]{"polygonpdual".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Graph $G^{1}_Q$}
+	\centering
+	\includegraphics[width=.65\textwidth]{"polygonpalgo1".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Resultant $G^{k}_Q$ Graph}
+	\centering
+	\includegraphics[width=.65\textwidth]{"polygonpalgo".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+\begin{itemize}
+	\item Remove vertices of degree three from $G^{k}_Q$. Same argument as before.  
+	\vfill
+	\item The resultant graph is colorable or can be made colorable by adding a vertex. 
+		\begin{itemize}
+			\item Hence $$\left \lfloor{\frac{n+1}{4}}\right \rfloor$$. 
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Orthogonal galleries with Cactus Dual Graphs}
+\begin{itemize}
+	\item Proving that this extends to an arbitrary number of holes.   
+	\vfill
+		\begin{itemize}
+		\item Dual graph of the quadrilateralization contains cycles connected by single edges.
+		\vfill
+		\item Dual graph of quadrilateralization contains cycles that share a vertex. 
+		\end{itemize}
+	\item Both cases involve splitting the graph up by the number of cycles, and applying the one hole result. 
+	\vfill
+	\item Each sub-cycle (hole) will require adding at most one vertex we get, $$\left \lfloor{\frac{n+h}{4}}\right \rfloor$$
+	\vfill
+	\item Note that the family of graphs with the properties are cactus graphs. 
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Cycles are connected by an Edge.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{}
+	\centering
+	\includegraphics[width=\textwidth]{"Edge".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Cycles are connected by a Vertex.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{}
+	\centering
+	\includegraphics[width=.75\textwidth]{"Vertex".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+\begin{itemize}
+	\item Note that each quadrilateral in $G^{k}_Q$ has all four vertices on either the interior or exterior boundary of the polygon. 
+	\vfill
+	\item We say that a quadrilateral is $balanced$ if it has 2 vertices on either boundary, otherwise we call it $skewed$
+	\vfill
+	\item Observe that every $skewed$ quadrilateral has a vertex $v$ of degree three.
+	\vfill
+	\item Let $G^{*}_Q = G^{k}_Q - v$. Note that $G_{Q}$ is 4-colorable if and only if $G^{*}_Q$ is 4-colorable.
+	\vfill
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Balanced and Skewed Quadrilaterals}
+	\centering
+	\includegraphics[width=.65\textwidth]{"polygonpbal".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthogonal galleries with one hole Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Resultant $G^{*}_Q$ Graph}
+	\centering
+	\includegraphics[width=.65\textwidth]{"polygonptri".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable}
+\begin{itemize}
+	\item Note that skewed quadrilaterals result in two types of triangles.
+		\begin{itemize}
+			\item $e$-triangles have two vertices on the exterior boundary.
+			\item $i$-triangles have two vertices in the interior boundary 
+		\end{itemize}
+		\vfill
+	\item Lemma: The cycle in the dual graph of any quadrilateralization of an orthogonal polygon with one hole has an even number (at least four) of balanced quadrilaterals.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont.}
+Case 1: $G^{*}_Q$ contains and even number of $e$-triangles and $i$-triangles.  
+\begin{itemize}
+	\item Note that $G^{*}_Q$ contains $m = 2l$ vertices where $l$ is the number of $balanced$ quadrilaterals.
+	\item We can color the graph by alternating 2 colors for the outside boundary, and the 2 other colors for the inside boundary. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Resultant $G^{*}_Q$ Graph}
+	\centering
+	\includegraphics[width=.65\textwidth]{"case1".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont.}
+Case 2/3: $G^{*}_Q$ contains and even number of $e$-triangles and odd number of $i$-triangles.  
+\begin{itemize}
+	\item Note that $G^{*}_Q$ contains $m = 2l +1$ vertices where $l$ is the number of $balanced$ quadrilaterals.
+	\item Consider the $i$-triangle with interior vertices $A$ and $B$ and exterior vertex $C$.
+	\item Split $A$ into $A'$ and $A''$ where $N(A') = N(A) - B$ and $N(A'') = \{B,C\}$. 
+	\item We can color the graph by alternating 2 colors for the outside boundary, and the 2 other colors for the inside boundary. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Resultant $G^{*}_Q$ Graph}
+	\centering
+	\includegraphics[width=.65\textwidth]{"case2".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont.}
+Case 4: $G^{*}_Q$ contains and odd number of $e$-triangles and odd number of $i$-triangles.  
+\begin{itemize}
+	\item Note there exists either an $i$-triangle or $e$-triangle that shares an edge with a $K_4$ subgraph.
+	\item WLOG assume it to be $t_i$.
+	\item Label the vertices on the external cycle $v_1,v_2,...,v_{2k+1}$ in a clockwise manner.
+	\item Label the vertices on the internal cycle $v_{2k+2},v_{2k+3},...,v_{m}$ in a clockwise manner.
+	\item We can labeled the graph such that $t_i$ is labeled $(v_m,v_{2k+2}v_1)$ 
+	\item Note that $V(G^{*}_Q)$ is even.
+	\item Split $v_1$ into $v'_1$ and $v''_1$ such that $N(v'_1) = N(v_1)/ \{v_2, v_{2k+3}\}$ and $N(v''_1) = \{v_2,v_{2k+2},v_{2k+3}\}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont.}
+	\begin{center}
+	\begin{figure}[H]
+	\caption{Resultant $G^{*}_Q$ Graph}
+	\centering
+	\includegraphics[width=.65\textwidth]{"case4".png}
+	\end{figure}
+	\end{center}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Proving $G^{*}_Q$ is 4-colorable Cont}
+\begin{itemize}
+	\item Thus we have shown that for any quadrilateralization $Q$ of an orthogonal polygon with one hole, the graph $G^*_Q$ is 4-colorable, with the upper-bound on the smallest color class being $\left \lfloor{\frac{n+1}{4}}\right \rfloor$.  
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}
+
+%\end{document}

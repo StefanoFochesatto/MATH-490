@@ -1,0 +1,138 @@
+ %%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz, calc}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+%% The next line says how the "vertex" style of nodes should look: drawn as small circles.
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt,fill=white]
+%%
+%% Next, we make a \vertex command as a shorthand in place of \node[vertex} to get that style.
+\newcommand{\vertex}{\node[vertex]}
+
+\linespread{1.1}
+
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Senior Seminar: Homework 8}
+\chead{\sc Stefano Fochesatto} 
+\rhead{due: Friday 03/20/2020}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+ 
+\begin{enumerate}
+\item (problem A) Prove that if the $n$-vertex graph $G$ has $k$ components each of which is acyclic, then $e(G)= n-k.$ (Note: a graph is \emph{acyclic} if it has no cycles.)\\
+
+\textbf{Proof} (Direct:) Suppose a graph $G$, with $k$ acyclic components. Consider the connected, acyclic graph $H$ that is created by adding edges that connect the components of $G$. Note that $e(H) = e(G) + (k-1)$ and $n(H) = n(G)$. Since $H$ is acyclic and connected it is a tree, by Theorem 2.1.4, $H$ has $e(H) = n(H) - 1$. Through algebra,
+\begin{align*}
+e(H) &= e(G) + (k-1),\\
+n(H) - 1 &= e(G) + (k-1),\\
+ n(G)- 1 &= e(G) + (k-1),\\
+n(G) - k&= e(G).
+\end{align*}
+\qed
+
+\vspace{1.5in}
+
+\item (problem B) Prove that if $L$ is a minimum edge cover of graph $G$, then every component of $L$ is a star. (Note: a \emph{star} is isomorphic to $K_{1,r}$ for some $r.$)\\
+
+\textbf{Proof} (Contradiction:) Suppose $L$ is a minimum edge cover of graph $G$, and there exists some component $K$, of $L$ that is not a star. Since $K$ is not a star there must be at least two vertices in $K$ with at least degree 2. Consider vertex $v$ where $d(v)\geq 2$, since $k$ is a connected component and not a star there must be another vertex $u$ that is adjacent to a neighbor of $v$ in order to fulfill the degree requirements, and therefore we know that $K$ contains a $p_3$ subgraph or a $K_3$ is $u \in N(v)$. Thus $L$ could be made smaller.
+\qed
+\vspace{1.5in} 
+
+\item (problem 3.1.4) For each of $\alpha$, $\alpha'$, $\beta$, and $\beta'$ characterize the simple graphs for which the value of the parameter is 1.\\
+
+\textbf{Proof} (Direct:)
+
+$\alpha = 1$ Consider any $K_n$. Every independent set can only contain one vertex otherwise the graph wouldn't be complete.\\
+
+$\alpha' = 1$ Consider any $K_{1,n}$. Since every matching can would saturate the the partition with just one vertex, and the matching would contain one edge. \\
+
+$\beta  = 1$ Consider any star graph. Note that for a star graph a central vertex is incident to all edges, therefore the minimum vertex cover in any star graph is size one. \\
+
+$\beta' = 1$ Consider a $K_2$, for a simple graph every edge is incident to exactly two vertices, thus the only way to have an edge cover size one is if the graph is a $K_2$.\\
+
+\qed
+\vspace{1.5in}
+
+\item (problem 3.1.5) Prove that $\displaystyle{\alpha \geq \frac{n}{\Delta +1}}$ where $\alpha=\alpha(G),$ $n=n(G)$ and $\Delta=\Delta(G).$\\
+
+\textbf{Proof} (Direct:)   Let the maximum independent set be $X$ and minimum vertex cover be $Y$. From Lemma 3.1.21 we know that every vertex $v \in X$ is adjacent to at least one vertex $u \in Y$. Summing over the degrees of each vertex in $X$ we get,\\
+\begin{equation*}
+\beta \leq \sum_{v\in X} d(v)
+\end{equation*}\\
+Since each vertex in $X$ has at most degree $\Delta$ we get,
+\begin{equation*}
+\beta \leq \alpha \Delta.
+\end{equation*}\\
+Finally substituting Lemma 3.1.21 which states $\beta = n - \alpha$,
+\begin{align*}
+\beta &\leq \alpha \Delta,\\
+n - \alpha  &\leq \alpha \Delta,\\
+n &\leq \alpha \Delta + \alpha,\\
+n &\leq \alpha (\Delta + 1),\\
+\frac{n}{(\Delta + 1)} &\leq \alpha.
+\end{align*}
+
+\qed
+
+\vspace{1.5in}
+
+\item (problem 3.1.9) Prove that every maximal matching in a graph $G$ has at least $\alpha'(G)/2$ edges. \\
+
+\textbf{Proof} (Direct:) Suppose some maximal matching $M$. Let $S$ be the set of vertices in $G$ saturated by $M$.\\
+
+Proving $\overline{S}$ is an independent set:
+Suppose that the $\overline{S}$ is not an independent set. Since vertices in $\overline{S}$ are unsaturated, it must be the case that there exists an edge incident to two unsaturated vertices that could be added to the maximal matching $M$. Thus $\overline{S}$ is an independent set.\\           
+\\
+Note that $n = |S| + |\overline{S}|$ and through algebra we get,  
+
+\begin{align*}
+n &= |S| + |\overline{S}|,\\
+|\overline{S}| &= n - |S|. \\
+\end{align*}
+Since $|S| = 2|M|$,
+\begin{align*}
+|\overline{S}| &= n - 2|M|, \\
+\alpha &\geq n - 2|M|, \\
+2|M| &\geq n - \alpha.
+\end{align*}
+By Lemma 3.2.21,
+\begin{align*}
+ 2|M| &\geq \beta .
+ \end{align*}
+ Since $\beta \geq \alpha'$,
+ \begin{align*}
+  2|M| &\geq \alpha' ,\\
+  |M| &\geq \frac{\alpha'}{2}. 
+\end{align*}
+
+
+\qed
+
+
+
+
+ 
+
+\vspace{1.5in}
+
+\end{enumerate}
+
+\end{document}
+

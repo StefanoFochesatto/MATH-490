@@ -1,0 +1,165 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz, calc}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+%% The next line says how the "vertex" style of nodes should look: drawn as small circles.
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt]
+%%
+%% Next, we make a \vertex command as a shorthand in place of \node[vertex} to get that style.
+\newcommand{\vertex}{\node[vertex]}
+\usepackage{float}
+
+\linespread{1.1}
+
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Senior Seminar: Homework 6}
+\chead{\sc Stefano Fochesatto } 
+\rhead{due: Friday 02/21/2020}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+ 
+\begin{enumerate}
+\item (problem 1.3.8) Which of the following are graphic sequences? Provide a construction or a proof of impossibility for each.\\
+
+(a) 5,5,4,3,2,2,2,1\\
+
+\textbf{Answer:} Consider the following graph, with the degrees of each vertex notated.\\
+\begin{figure}[H]
+\centering
+\includegraphics[width=.75 \textwidth]{"graphicsequence".png}
+\end{figure}
+\vspace{.5in}
+
+(d) 5,5,5,4,2,1,1,1\\
+
+
+\textbf{Answer:} Proceeding with the algorithm described in Example 1.3.30 to simplify the graphic sequence,
+\begin{align*}
+5,5,5,4,&2,1,1,1\\
+4,4,3,1&,1,1,0\\
+3,2,1,&0,0,0
+\end{align*}
+A graph with the simplified graphic sequence is impossible without a loop, consider the following multigraph.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5 \textwidth]{"PHP".png}
+\end{figure}
+
+
+\vspace{.5in}
+
+\item (problem A) The algorithm you used in problem 1.3.8 specifically refers to \emph{graphic} sequences (i.e. degree sequences of \emph{simple} graphs). Why doesn't the book have a Havel-Hakimi-like Theorem for multigraphs? (i.e. degree sequences for graphs where multiple edges and loops are allowed)\\
+
+Consider the following degree sequence for a multigraph $G$, $G: 51,1$. We can see that the first vertex here requires more edges than there are vertices so the first step of the algorithm described in problem 1.3.8 would fail. Even though this degree sequence is very simple and it's clear that graph $G$ is a 2 cycle where one vertex has 25 loops, the real problem is that there are degree sequences where an algorithm might produce non-isomorphic interpretations. Consider a graph with a loop between two vertices and another graph with two vertices each with a single loop.
+
+
+
+
+
+
+\vspace{.5in}
+
+\item (problem 1.3.18) For $k \geq 2$, prove that a $k$-regular bipartite graph has no cut-edge.\\
+
+\textbf{Proof:} (Contradiction) Suppose $k$-regular bipartite graph, $G$ with $k \geq 2$ and $G$ has a cut edge, $e$.   Suppose that removing $e$ disconnects vertices $x$ and $y$, and also creates two components, $X$ and $Y$ which are themselves bipartite and contain $x$ and $y$ respectively. Consider the partitions of $X$, $X_1$ and $X_2$, we know that the vertex $x$ must be contained in one of the partitions, let's say WLOG that $x \in X_1$. Now consider the sum of the degrees of $X_1$ and $X_2$.
+\begin{equation*}
+\sum_{v \in V(X_1)} d(v) = k|X_1 - 1| + ( k - 1)
+\end{equation*}
+\begin{equation*}
+\sum_{v \in V(X_2)} d(v) = k|X_2|
+\end{equation*}
+Since $k \geq 2$ we know that, 
+\begin{equation*}
+ k|X_1 - 1| + ( k - 1) \neq k|X_2|
+\end{equation*}
+In a bipartite graph the sum of the degrees in each partition should be equal because all edges go from one partition to another. Thus a contradiction, $X$ is both bipartite and not bipartite.  
+\vspace{.5in}
+
+ 
+\item (problem B) Give an example of a graph $G$ with the property that the algorithm in 1.3.30 when applied to the degree sequence of $G$ would \emph{never} construct graph $G$ -- even if you tried. Explain why your example satisfies the desired property.\\
+
+\textbf{Proof:} Consider a graph where the two highest degree vertices are in different connected components. 
+
+
+\begin{figure}[H]
+\centering
+\caption{Graph G: Graphic Sequence: 3,3,1,1,1,1,1,1}
+\includegraphics[width=.5 \textwidth]{"Algorithmcounter".png}
+\end{figure}
+However when we take the graphic sequence that corresponds to graph $G$ and apply our algorithm to produce a graph we will always get a graph that is isomorphic to the following graph,
+
+\begin{figure}[H]
+\centering
+\caption{Graph H: Graphic Sequence: 3,3,1,1,1,1,1,1}
+\includegraphics[width=.33 \textwidth]{"Algorithmcounter1".png}
+\end{figure}
+We can see here that $G$ is not isomorphic to $H$ as $H$ contains a path length 3 and $G$ does not. Therefore there is no way to produce graph $G$ given the graphic sequence $Graphic Sequence: 3,3,1,1,1,1,1,1$ even if you tried.
+
+
+
+
+
+\vspace{.5in}
+
+\item (problem C) After the proof of Theorem 1.3.23 the book states $(n-k)k$ can be maximized using calculus instead of using the switching idea used in the proof. \\
+
+(i) Provide the calculus proof the book alludes to. \\
+
+\textbf{Proof:} Consider the following, discrete function $H: \ZZ \to \ZZ$
+\begin{align*}
+H(k) &= \text{ number of edges in a $K_{n-k,k}$ bipartite graph}\\
+H(k) &= (n-k) k
+\end{align*}
+Which counts the number of edges in a $K_{n-k,k}$ bipartite graph. In order to maximize the number of edges using calculus we need to consider the following continuous function $f: \RR \to \RR$ 
+\begin{equation*}
+f(k) = (n-k)k
+\end{equation*}
+ In order to maximize $f(k)$ we'll take the derivative in-terms of $k$,
+\begin{align*}
+\frac{df}{dk} &= -k + n - k\\
+&=n - 2k
+\end{align*}
+Setting the derivative to zero and solving for $k$,
+\begin{align*}
+ 0 &=n - 2k\\
+ \frac{n}{2} &= k
+\end{align*}
+With the first derivative test we get that, $\frac{n}{2}$ is a maximum. Consider $f(\frac{n}{2})$
+\begin{equation*}
+f(\frac{n}{2}) = (n - \frac{n}{2}) \frac{n}{2} = \frac{n}{4}
+\end{equation*}
+Note that $H$ has integer values for the domain and the range. We have found the maximum of the continuous function $f(k)$, in order to find the maximum of the associated discrete function we take the floor of $\frac{n}{4}$ to find the closest integer value in the range of our discrete function. 
+\vspace{.5in}
+
+(ii) Now that you have produced the calculus proof, which method is preferable? Calculus or switching? Explain.\\
+
+
+\textbf{Proof:} The calculus method by far is easier to understand, since it is possible to model discrete functions with step functions and there we can clearly see that there will be a maximum. Really the only hurdle to jump with this method is understanding that we are taking a method for continuous functions and applying it to a discrete function. 
+
+\vspace{.5in}
+
+
+\end{enumerate}
+\end{document}
+
+
+

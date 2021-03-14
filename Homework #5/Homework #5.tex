@@ -1,0 +1,87 @@
+%%% Preamble starts here.
+\documentclass{amsart}
+%for the heading
+\usepackage{fancyhdr, enumerate}
+%for the picture. 
+\usepackage{tikz, calc}
+%adjust the page width
+\usepackage[margin=1in]{geometry}
+
+%% The next line says how the "vertex" style of nodes should look: drawn as small circles.
+\tikzstyle{vertex}=[circle, draw, inner sep=0pt, minimum size=6pt]
+%%
+%% Next, we make a \vertex command as a shorthand in place of \node[vertex} to get that style.
+\newcommand{\vertex}{\node[vertex]}
+
+\linespread{1.1}
+
+
+%special commands for number sets
+\def\RR{{\mathbb R}}
+\def\NN{{\mathbb N}}
+\def\ZZ{{\mathbb Z}}
+\def\QQ{{\mathbb Q}}
+\def\CC{{\mathbb C}}
+
+% header
+\lhead{\sc  Senior Seminar: Homework 5}
+\chead{\sc Stefano Fochesatto} 
+\rhead{due: Friday 02/14/2020}
+\cfoot{}
+\pagestyle{fancy}
+
+%%%% Main document starts here.
+
+\begin{document}
+\thispagestyle{fancy}
+ 
+\begin{enumerate}
+\item (problem 1.2.5) Let $v$ be the vertex of a connected simple graph $G.$ Prove that $v$ has a neighbor in every component of $G-v.$ Conclude that no graph has a cut-vertex of degree 1.\\
+
+\textbf{Proof:} Suppose a simple connected graph $G$ with vertex $v$. Now consider $G-v$. Suppose $G-v$ is still one component, since we know that $v$ cannot be a trivial component we know that $v$ must have a neighbor in the one component. Now suppose $G-v$ has more components then $G$ ie more than one, then by definition we know that $v$ is a cut vertex. Since $v$ is a cut vertex it must have neighbors in each of the components of $G-v.$
+
+\vspace{.5in}
+
+\item (problem 1.2.8) Determine the values of $m$ and $n$ such that $K_{m,n}$ is Eulerian. \\
+
+\textbf{Proof:} From Theorem 1.2.26 we know that for a graph to be Eulerian it must have at most one non-trivial component and all the vertices must have an even degree. Since every complete bipartite graph has at most one non-trivial component, all we have to worry about is the degree of each vertex. In a complete bipartite graph $K_{m,n}$ with vertex partitions $M,N$ then we know every vertex in the partition $M$ will have degree $n$ and and vertices in $N$ have degree $m$. Let $m,n$ be even natural numbers. 
+
+\vspace{.5in}
+
+\item (problem 1.2.20) Let $v$ be a cut vertex of a simple graph $G.$ Prove that $\overline{G}-v$ is connected.\\
+
+\textbf{Proof:} 
+We have to show that the graph $\overline{G}-v$ is connected. Suppose $u,w \in V(G-v)$, since $v$ is a cut vertex we know that $G-v$ must have more that one non-trivial component. Consider the case where $u$ and $w$ are in different components in $G-v$, then we know for certain that they are not neighbors and there for the edge $uw$ exists in $\overline{G} - v$. Now consider the case where lie in the same connected component in $G-v$. Since $v$ is a cut vertex we know that a vertex $x$ that lies in a different component from $u,w$ cannot be neighbor to either $u$ or $w$. Thus then we look at $\overline{G} - v$ we know that there has to exist a path $[u-x-w]$. Thus we have show that $\overline{G}-v$ is connected
+
+
+\vspace{.5in}
+
+
+\item (problem 1.3.1) Prove or Disprove: If $u$ and $v$ are the only vertices of odd degree in a graph $G$, then $G$ contains a $u,v$-path. \\
+
+\textbf{Proof:} (Contradiction:) Suppose $u$ and $v$ are the only vertices of odd degree in a graph $G$, and $G$ does not contain a $u,v$-path. If $G$ does not contain a $u,v$-path we know that $u$ and $v$ must lie in separate components $U$ and $V$. Now consider subgraph $U$, we can use the degree sum formula to get,
+\begin{equation*}
+\sum_{v\in V(U)}d{v} = 2e(U)
+\end{equation*}
+Since $u$ is the only vertex of odd degree in graph $U$ we have a contradiction because the sum of the degrees cannot be an even number. 
+\vspace{.5in}
+
+\item (problem 1.3.3) Let $u$ and $v$ be adjacent vertices in a simple graph $G.$ Prove that edge $uv$ belongs to at least $d(u)+d(v)-n(G)$ triangles in $G.$\\
+
+\textbf{Proof:} To count the number of triangle is equivalent to counting the number of neighbors that are shared between vertices $u$ and $v$. Consider a graph $G$ where every vertex is a neighbor to either $u$ or $v$. Continuing by inclusion-exclusion we can count the neighbors of $u$ by $d(u)$ and similarly with $d(v)$, however we have counted the neighbors that are shared by both vertices twice (including themselves), and the unshared neighbors once so we subtract away the total number of vertices $n(G)$ to get the total number of shared vertices. In this case we have counted exactly the number of shared neighbors between $u$ and $v$,
+\begin{equation*}
+neighbors(u,v) = d(u)+d(v)-n(G).
+\end{equation*}
+There is the case, where there are vertices that are neither neighbor to $u$ or $v$ and therefore do not get counted at all during the inclusion step, but they do get counted during the exclusion step, therefore the result of our count will always be a lower bound,
+\begin{equation*}
+neighbors(u,v) \geq d(u)+d(v)-n(G).
+\end{equation*}
+
+
+\vspace{.5in}
+
+\end{enumerate}
+\end{document}
+
+
+
